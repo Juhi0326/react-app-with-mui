@@ -2,13 +2,22 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import PropTypes from 'prop-types'
+import CssBaseline from '@mui/material/CssBaseline';
+import { useTheme } from '@mui/material/styles';
 
-export default function CustomButton({ variant, color, value, onClick, btnSize }) {
+
+export default function CustomButton({ variant, color, value, onClick, btnSize, sx, fullWidth, type }) {
+
+    const theme = useTheme();
+
+    React.useEffect(() => {
+        console.log(color)
+    }, [])
 
     CustomButton.propTypes = {
         variant: PropTypes.string,
         value: PropTypes.string.isRequired,
-        onClick: PropTypes.func.isRequired
+        //onClick: PropTypes.func.isRequired
     }
     
     CustomButton.defaultProps = {
@@ -17,11 +26,15 @@ export default function CustomButton({ variant, color, value, onClick, btnSize }
     }
   return (
     <Stack spacing={2} direction="row">
+    <CssBaseline />
       <Button 
       variant={variant}
-      onClick={(event) => onClick(event)}
-      color={color}
+      onClick={(event) => {onClick && onClick(event)}}
+      color={theme.color}
       size={btnSize}
+      sx={sx}
+      fullWidth={fullWidth ? true : false}
+      type={type}
       >
       {value}</Button>
     </Stack>

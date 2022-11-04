@@ -10,7 +10,9 @@ function App() {
 
   const theme = createTheme({
     palette: {
-      primary: red,
+      primary: {
+        main: '#f44336'
+      } ,
       success: green,
       secondary: blue
     },
