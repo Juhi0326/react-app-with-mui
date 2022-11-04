@@ -1,11 +1,23 @@
 import React from 'react'
+import CustomButton from '../components/CustomButton'
 
 export const About = () => {
-  return (
-    <div>
-               About page
-    </div>
+    const handleClick = () => {
+        console.log('click')
+    }
+    return (
+        <div>
+            About page
+            <CustomButton
+                onClick={handleClick}
+                value='Bejelentkezés'
+                variant={'contained'}
+                color={'success'}
+                btnSize={'medium'}
+            />
 
-  )
+        </div>
+
+    )
 }
 export default About;
