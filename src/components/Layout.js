@@ -180,6 +180,7 @@ export default function MiniDrawer({children}) {
       <Box component="main" sx={{ 
         flexGrow: 1, 
         p: 3,
+        mx: 16,
         mt: 8 }}>
         {children}
       </Box>
