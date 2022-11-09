@@ -20,8 +20,9 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { signOut } from '../store/actions'
+import { signOut, toastShow } from '../store/actions'
 import CustomButton from '../components/CustomButton';
+import CustomSnackbar from '../components/CustomSnackbar';
 
 
 const drawerWidth = 240;
@@ -109,6 +110,7 @@ export default function MiniDrawer({ children }) {
     if (isLogged) {
       localStorage.removeItem('user');
       dispatch(signOut())
+      dispatch(toastShow(`Sikeres kijelentkezés! `, 'success'))
       navigate('/sign-in')
     } else {
       navigate('/sign-in')
@@ -223,6 +225,7 @@ export default function MiniDrawer({ children }) {
         mx: 16,
         mt: 8
       }}>
+        <CustomSnackbar />
         {children}
       </Box>
     </Box>

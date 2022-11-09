@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from './Routes';
 import Layout from './components/Layout'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { blue, green } from '@mui/material/colors';
+import { blue, green, purple } from '@mui/material/colors';
 
 
 function App() {
@@ -14,7 +14,8 @@ function App() {
         main: '#f44336'
       } ,
       success: green,
-      secondary: blue
+      secondary: blue,
+      error: purple
     },
   });
   return (

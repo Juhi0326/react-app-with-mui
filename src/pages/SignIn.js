@@ -58,7 +58,7 @@ export const SignIn = () => {
       })
       .catch((err) => {
         console.log(err)
-        dispatch(toastShow('Sikertelen bejelentkezés! részletes hibaüzenet: ' + err, 'danger'))
+        dispatch(toastShow('Sikertelen bejelentkezés! részletes hibaüzenet: ' + err, 'error'))
       });
 
   };
