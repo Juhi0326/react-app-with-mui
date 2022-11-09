@@ -1,7 +1,6 @@
 import { useEffect, Fragment, forwardRef } from 'react';
 import Stack from '@mui/material/Stack';
 import CssBaseline from '@mui/material/CssBaseline';
-import { useTheme } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { toastHide } from '../store/actions';
 import Snackbar from '@mui/material/Snackbar';
@@ -20,7 +19,6 @@ export default function CustomSnackbar() {
     const backGround = useSelector(state => state.toast.textType);
     const toastMessage = useSelector(state => state.toast.payload);
     const dispatch = useDispatch();
-    const theme = useTheme();
 
     useEffect(() => {
     }, [toastState, backGround, toastMessage])

@@ -53,8 +53,8 @@ export const RegisterForm = () => {
                 console.log(loggedUser);
                 event.target.reset()
 
-                dispatch(toastShow(`Sikeres Regisztráció! `, 'success'))
-                navigate('/')
+                dispatch(toastShow(`Sikeres Regisztráció, most már bejelentkezhetsz! `, 'success'))
+                navigate('/sign-in')
 
 
             })
