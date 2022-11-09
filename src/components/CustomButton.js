@@ -6,17 +6,18 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { useTheme } from '@mui/material/styles';
 
 
-export default function CustomButton({ variant, color, value, onClick, btnSize, sx, fullWidth, type }) {
+export default function CustomButton({ variant, color, value, onClick, btnSize, sx, fullWidth, type, disableElevation }) {
 
     const theme = useTheme();
 
     React.useEffect(() => {
         console.log(color)
-    }, [])
+    }, [color])
 
     CustomButton.propTypes = {
         variant: PropTypes.string,
         value: PropTypes.string.isRequired,
+        disableElevation:PropTypes.bool
         //onClick: PropTypes.func.isRequired
     }
     
@@ -35,6 +36,7 @@ export default function CustomButton({ variant, color, value, onClick, btnSize, 
       sx={sx}
       fullWidth={fullWidth ? true : false}
       type={type}
+      disableElevation = {disableElevation}
       >
       {value}</Button>
     </Stack>

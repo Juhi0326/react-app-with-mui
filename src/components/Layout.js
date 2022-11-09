@@ -18,6 +18,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { signOut } from '../store/actions'
+import CustomButton from '../components/CustomButton';
+
 
 const drawerWidth = 240;
 
@@ -86,9 +91,29 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer({children}) {
+export default function MiniDrawer({ children }) {
+
+
+  let navigate = useNavigate();
+  const dispatch = useDispatch()
+  const isLogged = useSelector(state => state.user.state);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    console.log('useffect run')
+  }, [isLogged])
+
+  const handleLogInfo = () => {
+    console.log('rányomtam, és ez az isLogged értéke: ' + isLogged)
+    if (isLogged) {
+      localStorage.removeItem('user');
+      dispatch(signOut())
+      navigate('/sign-in')
+    } else {
+      navigate('/sign-in')
+    }
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -115,10 +140,25 @@ export default function MiniDrawer({children}) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component="div" id='toolbar-first-element'>
             Juhi's web App
           </Typography>
+          <Typography variant="h6" >
+            {!isLogged ? <CustomButton
+              value='Sign in'
+              color={'primary'}
+              variant={'contained'}
+              disableElevation={true}
+              onClick={handleLogInfo} />
+              : <CustomButton
+                value='Sign Out'
+                color={'primary'}
+                variant={'contained'}
+                disableElevation={true}
+                onClick={handleLogInfo} />}
+          </Typography>
         </Toolbar>
+
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
@@ -177,11 +217,12 @@ export default function MiniDrawer({children}) {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ 
-        flexGrow: 1, 
+      <Box component="main" sx={{
+        flexGrow: 1,
         p: 3,
         mx: 16,
-        mt: 8 }}>
+        mt: 8
+      }}>
         {children}
       </Box>
     </Box>

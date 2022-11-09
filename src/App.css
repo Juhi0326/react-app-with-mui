@@ -5,3 +5,7 @@
 .placeOfToast{
   height: 85px;
 }
+
+#toolbar-first-element {
+  flex-grow: 1;
+}

@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from './Routes';
 import Layout from './components/Layout'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { blue, green, red } from '@mui/material/colors';
+import { blue, green } from '@mui/material/colors';
 
 
 function App() {
