@@ -13,7 +13,7 @@ class AuthService {
       .then(response => {
         
         if (response.data.accessToken) {
-          localStorage.setItem('user', JSON.stringify(response.data));
+          localStorage.setItem('user', response.data);
         }
 
         return response.data;
@@ -58,7 +58,7 @@ class AuthService {
 
   receiveNewPassword(id, token, password) {
     try {
-      return axios.post(API_URL + 'receive_new_password'+'/' + id + '/' + token, password)
+      return axios.post(`${API_URL}receive_new_password/${id}/${token}`, password)
 
     } catch (error) {
         // Error 😨

@@ -11,18 +11,26 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toastShow, signIn } from '../store/actions'
 import authService from '../services/authService';
 import { useNavigate } from "react-router-dom";
 
 
-  export const SignIn = () => {
+export const SignIn = () => {
 
   let navigate = useNavigate();
   const dispatch = useDispatch()
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+
+  const goToForgottenPassword = () => {
+    navigate('/forgotten-password')
+  }
+
+  const goToRegister = () => {
+    navigate('/register')
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -111,12 +119,22 @@ import { useNavigate } from "react-router-dom";
           />
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2" color="secondary">
+              <Link component="button"
+                variant="body2"
+                color="secondary"
+                onClick={() => {
+                  goToForgottenPassword()
+                }} >
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2" color="secondary">
+              <Link component="button"
+                variant="body2"
+                color="secondary"
+                onClick={() => {
+                  goToRegister()
+                }}>
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
