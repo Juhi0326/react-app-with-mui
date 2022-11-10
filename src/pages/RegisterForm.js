@@ -12,8 +12,28 @@ import { toastShow } from '../store/actions'
 import authService from '../services/authService';
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
+import {useForm} from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
 export const RegisterForm = () => {
+
+    const validationSchema = Yup.object().shape({
+        userName:Yup.string()
+            .required('user name is required')
+            .matches(/^[a-zA-ZíÍéÉáÁőŐűŰúÚóÓüÜ0-9-. ]{3,20}$/g, 'the username can only consist of normal characters and numbers, from 3 to 20 characters'),
+        email:Yup.string()
+        .required('Email is required')
+        .matches(/^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/, 'invalid email!'),
+        password: Yup.string()
+            .required('Password is required')
+            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\\[-`{-~]).{6,20}$/g, 'invalid password pattern!'),
+        confirmPassword: Yup.string()
+            .required('Confirm Password is required')
+            .oneOf([Yup.ref('password')], 'Passwords must match')
+            
+    });
+    const formOptions = { resolver: yupResolver(validationSchema) };
 
     let navigate = useNavigate();
     const dispatch = useDispatch()
@@ -25,11 +45,12 @@ export const RegisterForm = () => {
     const goToSignIn = () => {
         navigate('/sign-in')
     }
-
     const selectFile = (event) => {
         setFile(event.target.files[0])
     }
-    const handleSubmit = (event) => {
+    const { register, handleSubmit, formState: { errors } } = useForm(formOptions);
+
+    const onSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget)
         let image = data.get('btn-upload')
@@ -80,7 +101,7 @@ export const RegisterForm = () => {
                 <Typography component="h1" variant="h5">
                     Register Form
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
                     <TextField
                         margin="normal"
                         required
@@ -88,8 +109,11 @@ export const RegisterForm = () => {
                         id="userName"
                         label="User Name"
                         name="userName"
+                        {...register('userName')}
                         autoComplete="userName"
                         onChange={(e) => { setUserName(e.target.value) }}
+                        error={!!errors?.userName}
+                        helperText={errors?.userName ? errors?.userName.message : null}
                     />
                     <TextField
                         margin="normal"
@@ -98,19 +122,37 @@ export const RegisterForm = () => {
                         id="email"
                         label="Email Address"
                         name="email"
+                        {...register('email')}
                         autoComplete="email"
                         onChange={(e) => { setEmail(e.target.value) }}
+                        error={!!errors?.email}
+                        helperText={errors?.email ? errors?.email.message : null}
                     />
                     <TextField
                         margin="normal"
                         required
                         fullWidth
                         name="password"
+                        {...register('password')}
                         label="Password"
                         type="password"
                         id="password"
-                        autoComplete="current-password"
                         onChange={(e) => { setPassword(e.target.value) }}
+                        error={!!errors?.password}
+                        helperText={errors?.password ? errors?.password.message : null}
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="confirmPassword"
+                        {...register('confirmPassword')}
+                        label="Confirm Password"
+                        type="password"
+                        id="confirmPassword"
+                        onChange={(e) => { setPassword(e.target.value) }}
+                        error={!!errors?.confirmPassword}
+                        helperText={errors?.confirmPassword ? errors?.confirmPassword.message : null}
                     />
                     <label htmlFor="btn-upload">
                         <input
