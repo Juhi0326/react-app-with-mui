@@ -57,6 +57,7 @@ class AuthService {
   }
 
   receiveNewPassword(id, token, password) {
+    console.log(`ez az id: ${id}, ez a token. ${token}, és ez a password: ${password}`)
     try {
       return axios.post(`${API_URL}receive_new_password/${id}/${token}`, password)
 

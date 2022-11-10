@@ -81,7 +81,7 @@ export const ResetPasswordEmail = () => {
                     
                     <CustomButton
                         type={"submit"}
-                        value='Send reset password'
+                        value='Send'
                         fullWidth='fullWidth'
                         variant={'contained'}
                         color={'primary'}

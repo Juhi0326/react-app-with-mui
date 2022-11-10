@@ -25,7 +25,7 @@ export const SignIn = () => {
   const [password, setPassword] = React.useState('');
 
   const goToForgottenPassword = () => {
-    navigate('/forgotten-password')
+    navigate('/reset-password-email')
   }
 
   const goToRegister = () => {

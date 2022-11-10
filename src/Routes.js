@@ -4,6 +4,7 @@ import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import SignIn from "./pages/SignIn";
 import ResetPasswordEmail from "./pages/ResetPasswordEmail";
+import AddNewPassword from "./pages/AddNewPassword";
 import RegisterForm from "./pages/RegisterForm";
 import { useSelector } from 'react-redux';
 
@@ -16,6 +17,7 @@ const AppRoutes = () => {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/reset-password-email" element={<ResetPasswordEmail />} />
+        <Route path="/users/addNewPassword/:id/:token" element={<AddNewPassword />} />
         <Route path="*" element={isLogged ? <NotFound /> : <div>Please log in!</div>} />
     </Routes>
   );
