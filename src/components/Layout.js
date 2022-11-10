@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { signOut, toastShow } from '../store/actions'
 import CustomButton from '../components/CustomButton';
 import CustomSnackbar from '../components/CustomSnackbar';
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 
 const drawerWidth = 240;
@@ -94,16 +95,18 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function MiniDrawer({ children }) {
 
+  
 
   let navigate = useNavigate();
   const dispatch = useDispatch()
   const isLogged = useSelector(state => state.user.state);
   const theme = useTheme();
+  const isXs = JSON.stringify(useMediaQuery("(max-width:600px)"));
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
-    console.log('useffect run')
-  }, [isLogged])
+    console.log('useffect run: ' + isXs)
+  }, [isXs])
 
   const handleLogInfo = () => {
     console.log('rányomtam, és ez az isLogged értéke: ' + isLogged)
@@ -137,13 +140,13 @@ export default function MiniDrawer({ children }) {
             edge="start"
             sx={{
               marginRight: 5,
-              ...(open && { display: 'none' }),
+              ...(open && { display: {xs: 'none', md:'flex'} }),
             }}
           >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div" id='toolbar-first-element'>
-            Juhi's web App
+            Juhi's web App 
           </Typography>
           <Typography variant="h6" >
             {!isLogged ? <CustomButton
@@ -222,7 +225,7 @@ export default function MiniDrawer({ children }) {
       <Box component="main" sx={{
         flexGrow: 1,
         p: 3,
-        mx: 16,
+        mx: {xs: 0, md: 16},
         mt: 8
       }}>
         <CustomSnackbar />
