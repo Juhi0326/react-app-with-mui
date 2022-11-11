@@ -1,15 +1,10 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import CustomButton from '../components/CustomButton';
 import Loading from '../components/Loading';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useParams } from "react-router-dom";
@@ -23,14 +18,23 @@ import productSevice from '../services/productSevice';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import IconButton from '@mui/material/IconButton';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
 
-
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    elevation: 0
+    
+}));
 
 export const ProductDetails = () => {
 
 
     const navigate = useNavigate();
-    const dispatch = useDispatch()
     const params = useParams();
     const [product, setProduct] = React.useState(null);
     const [counter, setCounter] = React.useState(1);
@@ -96,7 +100,10 @@ export const ProductDetails = () => {
                 }}
             >
                 {!loading && !error ?
-                    <Card sx={{ width: 500 }}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}  >
+                        <Item>
+                        <Card sx={{ maxWidth: 500 }}>
                         {<CardMedia
                             component="img"
                             height="400"
@@ -151,7 +158,9 @@ export const ProductDetails = () => {
                         </CardActions>
 
                     </Card>
-                    : null}
+                        </Item>
+                    </Grid>
+                </Grid> : null }
                 <div>
                     {error ? <div>{error}</div> : null}
                 </div>
