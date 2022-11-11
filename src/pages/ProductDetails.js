@@ -20,6 +20,10 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import productSevice from '../services/productSevice';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import IconButton from '@mui/material/IconButton';
+
 
 
 export const ProductDetails = () => {
@@ -29,6 +33,7 @@ export const ProductDetails = () => {
     const dispatch = useDispatch()
     const params = useParams();
     const [product, setProduct] = React.useState(null);
+    const [counter, setCounter] = React.useState(1);
     const [error, setError] = React.useState("");
     const [loading, setLoading] = React.useState(true);
 
@@ -41,7 +46,7 @@ export const ProductDetails = () => {
 
     React.useEffect(() => {
 
-    }, [product]);
+    }, [product, counter]);
 
     const formatMoney = (amount) => {
         const value = Number(amount).toLocaleString("hu-HU", {
@@ -51,6 +56,18 @@ export const ProductDetails = () => {
         return `${value} Ft`;
     }
 
+    const addItem = () => {
+        let element = counter + 1
+        setCounter(element)
+    }
+    const removeItem = () => {
+        if (counter > 1) {
+            let element = counter - 1
+            setCounter(element)
+        }
+
+
+    }
     const getProductById = async (productId) => {
         console.log(`ez a param.id: ${productId}`)
         try {
@@ -91,12 +108,12 @@ export const ProductDetails = () => {
                                 {product?.name}
                             </Typography>
                             <Typography variant="body2" color="text.secondary" sx={{
-                                mb:3
+                                mb: 3
                             }}>
                                 {product?.description}
                             </Typography>
                             <Typography variant="body2" color="text.secondary" sx={{
-                                mb:3
+                                mb: 3
                             }}>
                                 Price: {formatMoney(product?.price)}
                             </Typography>
@@ -104,7 +121,7 @@ export const ProductDetails = () => {
                                 <Typography variant="body2" sx={{
                                     color: 'red'
                                 }}>
-                                   Discounted price: {formatMoney(product?.discountedPrice)}
+                                    Discounted price: {formatMoney(product?.discountedPrice)}
                                 </Typography>
                                 : null}
                         </CardContent>
@@ -114,8 +131,25 @@ export const ProductDetails = () => {
                                 variant={'contained'}
                                 color={'primary'}
                                 btnSize={'small'}
-                                sx={{ mt: 3, mb: 2 }} />
+                                sx={{ mt: 3, mb: 2, mr: 5, ml: 1 }} />
+                            <IconButton>
+                                <AddIcon
+                                    onClick={addItem} />
+                            </IconButton>
+                            <IconButton>
+                                <RemoveIcon
+                                    onClick={removeItem}
+                                />
+                            </IconButton>
+                            <TextField
+                                id="outlined-basic"
+                                value={counter}
+                                variant="outlined"
+                                sx={{
+                                    maxWidth: 80
+                                }} />
                         </CardActions>
+
                     </Card>
                     : null}
                 <div>
