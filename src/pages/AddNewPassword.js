@@ -8,7 +8,7 @@ import Container from '@mui/material/Container';
 import { useDispatch } from 'react-redux';
 import { toastShow } from '../store/actions'
 import authService from '../services/authService';
-import { useNavigate , useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -26,13 +26,9 @@ export const AddNewPassword = () => {
     const formOptions = { resolver: yupResolver(validationSchema) };
 
     const params = useParams();
-    //let navigate = useNavigate();
     const dispatch = useDispatch()
     const [password, setPassword] = React.useState('');
 
-/*     const goToSignIn = () => {
-        navigate('/sign-in')
-    } */
     const { register, handleSubmit, reset, formState: { errors } } = useForm(formOptions);
 
     const onSubmit = (event) => {

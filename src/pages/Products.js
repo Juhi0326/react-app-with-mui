@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import { useEffect, useState } from "react";
 import TextField from '@mui/material/TextField';
 import productSevice from '../services/productSevice';
+import { useNavigate } from "react-router-dom";
 
 
 export default function Products() {
@@ -19,6 +20,7 @@ export default function Products() {
     const [loading, setLoading] = useState(true);
     const [searchString, setSearchString] = useState("");
 
+    const navigate = useNavigate();
     useEffect(() => {
         console.log('useffect run from products')
         getProducts();
@@ -45,6 +47,7 @@ export default function Products() {
 
     const GoToDetails = (productId) => {
         console.log(`rákattintottam, ez a product id: ${productId}`)
+        navigate(`/product-details/${productId}`)
     }
 
     const formatMoney = (amount) => {
