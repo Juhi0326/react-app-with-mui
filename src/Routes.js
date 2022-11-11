@@ -6,6 +6,7 @@ import SignIn from "./pages/SignIn";
 import ResetPasswordEmail from "./pages/ResetPasswordEmail";
 import AddNewPassword from "./pages/AddNewPassword";
 import RegisterForm from "./pages/RegisterForm";
+import Products from "./pages/Products";
 import { useSelector } from 'react-redux';
 
 const AppRoutes = () => {
@@ -13,6 +14,7 @@ const AppRoutes = () => {
   return (
     <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/about" element={<About />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/sign-in" element={<SignIn />} />

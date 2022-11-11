@@ -9,3 +9,8 @@
 #toolbar-first-element {
   flex-grow: 1;
 }
+.redPrice {
+  color: crimson;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
