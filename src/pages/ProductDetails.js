@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import CustomButton from '../components/CustomButton';
+import Loading from '../components/Loading';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -121,7 +122,7 @@ export const ProductDetails = () => {
                     {error ? <div>{error}</div> : null}
                 </div>
                 <div>
-                    {loading ? <div>loading...</div> : null}
+                    {loading ? <Loading /> : null}
                 </div>
 
 
