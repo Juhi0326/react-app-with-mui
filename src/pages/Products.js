@@ -25,8 +25,11 @@ export default function Products() {
     useEffect(() => {
         console.log('useffect run from products')
         getProducts();
-        setLoading(false)
     }, []);
+
+    useEffect(() => {
+        console.log(`ez a loading értéke: ${loading}`)
+    }, [loading]);
 
     useEffect(() => {
         console.log('useffect run with searchString')
@@ -58,15 +61,14 @@ export default function Products() {
         });
         return `${value} Ft`;
     }
-    const getProducts = async () => {
 
+    const getProducts = async () => {
         try {
             const result = await productSevice.getProducts();
             setProducts(result.data.products);
-
+            setLoading(false)
         } catch (err) {
             setError(err.message || "Unexpected Error!");
-
         } finally {
         }
     }
@@ -124,7 +126,10 @@ export default function Products() {
                 </div> : null}
             </div>
             <div>
-                {error ? <div>{error}</div> :  <Loading />}
+                {error ? <div>{error}</div> :  null}
+            </div>
+            <div>
+            {loading ? <Loading /> :  null}
             </div>
         </Box>
     );
