@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useParams } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import { addToCart } from '../store/actions'
 import { useNavigate } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -33,7 +34,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export const ProductDetails = () => {
 
-
+    const dispatch = useDispatch()
     const navigate = useNavigate();
     const params = useParams();
     const [product, setProduct] = React.useState(null);
@@ -69,8 +70,6 @@ export const ProductDetails = () => {
             let element = counter - 1
             setCounter(element)
         }
-
-
     }
     const getProductById = async (productId) => {
         console.log(`ez a param.id: ${productId}`)
@@ -85,6 +84,13 @@ export const ProductDetails = () => {
 
         } finally {
         }
+    }
+
+    const addToCartFunction = () => {
+    let products = {};
+      Object.assign(products, product, { quantity: counter });
+      dispatch(addToCart(products))
+      //navigate("/users/shopping-cart");
     }
 
     return (
@@ -138,6 +144,7 @@ export const ProductDetails = () => {
                                 variant={'contained'}
                                 color={'primary'}
                                 btnSize={'small'}
+                                onClick={addToCartFunction}
                                 sx={{ mt: 3, mb: 2, mr: 5, ml: 1 }} />
                             <IconButton>
                                 <AddIcon

@@ -62,9 +62,9 @@ export const RegisterForm = () => {
         let image = data.get('btn-upload')
         setFile(image) */
         const user = new FormData();
-        user.append("userName", event.userName);
-        user.append("email", event.email);
-        user.append("password", event.password);
+        user.append("userName", userName);
+        user.append("email", email);
+        user.append("password", password);
         user.append("role", "user");
         user.append("userImage", file);
 
@@ -72,13 +72,13 @@ export const RegisterForm = () => {
         console.log(JSON.stringify(user))
         authService.RegisterForm(user)
             .then((response) => {
-                const loggedUser = {
+/*                 const loggedUser = {
                     userName: response.userName,
                     userId: response.userId,
                     role: response.role,
                     email: response.userEmail,
                 }
-                console.log(loggedUser);
+                console.log(loggedUser); */
 
                 dispatch(toastShow(`Sikeres Regisztráció, most már bejelentkezhetsz! `, 'success'))
                 navigate('/sign-in')
