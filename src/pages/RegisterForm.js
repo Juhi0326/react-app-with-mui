@@ -46,21 +46,28 @@ export const RegisterForm = () => {
         navigate('/sign-in')
     }
     const selectFile = (event) => {
+        console.log(`ez a file change event: ${event}`)
         setFile(event.target.files[0])
+        console.log(file)
     }
+    React.useEffect(() => {
+        console.log(file)
+    }, [file]);
     const { register, handleSubmit, formState: { errors } } = useForm(formOptions);
 
     const onSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget)
+        console.log(event)
+        //event.preventDefault();
+/*         const data = new FormData(event)
         let image = data.get('btn-upload')
-        setFile(image)
+        setFile(image) */
         const user = new FormData();
-        user.append("userName", userName);
-        user.append("email", email);
-        user.append("password", password);
+        user.append("userName", event.userName);
+        user.append("email", event.email);
+        user.append("password", event.password);
         user.append("role", "user");
         user.append("userImage", file);
+
 
         console.log(JSON.stringify(user))
         authService.RegisterForm(user)
@@ -69,10 +76,9 @@ export const RegisterForm = () => {
                     userName: response.userName,
                     userId: response.userId,
                     role: response.role,
-                    email: response.useemailrName,
+                    email: response.userEmail,
                 }
                 console.log(loggedUser);
-                event.target.reset()
 
                 dispatch(toastShow(`Sikeres Regisztráció, most már bejelentkezhetsz! `, 'success'))
                 navigate('/sign-in')
@@ -80,8 +86,8 @@ export const RegisterForm = () => {
 
             })
             .catch((err) => {
-                console.log(err)
-                dispatch(toastShow('Sikertelen Regisztráció! részletes hibaüzenet: ' + err, 'danger'))
+                console.log(err.response.data.message)
+                dispatch(toastShow('Sikertelen Regisztráció! részletes hibaüzenet: ' + err.response.data.message, 'error'))
             });
 
     };
@@ -160,7 +166,7 @@ export const RegisterForm = () => {
                             name="btn-upload"
                             style={{ display: 'none' }}
                             type="file"
-                            onChange={selectFile} />
+                            onChange={(e) => selectFile(e)} />
                         <Button
                             className="btn-choose"
                             variant="outlined"
