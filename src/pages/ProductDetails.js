@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useParams } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import { toastShow } from '../store/actions'
 import { addToCart } from '../store/actions'
 import { useNavigate } from "react-router-dom";
 import Card from '@mui/material/Card';
@@ -90,6 +91,8 @@ export const ProductDetails = () => {
     let products = {};
       Object.assign(products, product, { quantity: counter });
       dispatch(addToCart(products))
+      setCounter(1)
+      dispatch(toastShow(`A terméket hozáadtuk a kosárhoz! `, 'success'))
       //navigate("/users/shopping-cart");
     }
 
