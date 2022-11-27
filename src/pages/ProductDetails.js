@@ -93,7 +93,7 @@ export const ProductDetails = () => {
       dispatch(addToCart(products))
       setCounter(1)
       dispatch(toastShow(`A terméket hozáadtuk a kosárhoz! `, 'success'))
-      //navigate("/users/shopping-cart");
+      navigate("/users/shopping-cart");
     }
 
     return (

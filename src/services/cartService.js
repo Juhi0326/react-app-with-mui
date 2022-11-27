@@ -18,6 +18,7 @@ const getSubtotal = (product) => {
 }
 
 const getSumCharge = (products) => {
+    console.log('ide bejön, és ez a products tömb: ' + products)
     var sum = 0
     lodash.forEach(products, function (value) {
         lodash.forEach(value, function (value2, key2) {

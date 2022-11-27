@@ -241,12 +241,12 @@ export default function MiniDrawer({ children }) {
                     mr: open ? 3 : 'auto',
                     justifyContent: 'center',
                   }}
-                  onClick={() => GoToSelectedPage('/cart')}
+                  onClick={() => GoToSelectedPage('/users/shopping-cart')}
                 >
                   <ShoppingCartIcon />
                 </ListItemIcon>
                 <ListItemText primary={"Cart"} sx={{ opacity: open ? 1 : 0 }}
-                  onClick={() => GoToSelectedPage('/cart')} />
+                  onClick={() => GoToSelectedPage('/users/shopping-cart')} />
               </ListItemButton>
             </ListItem>
           </Tooltip>

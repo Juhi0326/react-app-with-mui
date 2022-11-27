@@ -31,7 +31,15 @@ export const toastHide = (text)=> {
 export const addToCart = (payload)=> {
     return {
         type: 'ADD_TO_CART',
-        payload: payload,
-
+        payload,
     }
 }
+
+/* export const changeQuantityOfProductById = (productId,quantity)=> {
+    return {
+        type: 'CHANGE_QUANTITY_OF_PRODUCT',
+        productId,
+        quantity
+
+    }
+} */
