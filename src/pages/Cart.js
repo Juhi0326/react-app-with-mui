@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { toastShow } from '../store/actions'
+import CustomButton from '../components/CustomButton';
+import Divider from '@mui/material/Divider';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -35,6 +37,10 @@ export const Cart = () => {
         quantity--;
     }
 
+    const removeProductById = (productId) => {
+        console.log(` ezt kéne törölni: ${productId}`)
+    }
+
     const formatMoney = (amount) => {
         const value = Number(amount).toLocaleString("hu-HU", {
             // minimumFractionDigits: 2,
@@ -54,12 +60,12 @@ export const Cart = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
-                <Grid item xs={12} md={8}>
+                <Grid item xs={12} md={6}>
                     <Item>
                         {cartState?.map((product, key) => (
                             <Card sx={{
                                 maxWidth: 345,
-                                height: 500
+                                height: 400
                             }}
                                 key={product._id}>
                                 <Avatar
@@ -84,22 +90,35 @@ export const Cart = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <IconButton
+                                    <Grid item xs={12}>
+                                        <IconButton
                                         >
-                                        <AddIcon />
-                                    </IconButton>
-                                    <IconButton
+                                            <AddIcon />
+                                        </IconButton>
+                                        <IconButton
                                         >
-                                        <RemoveIcon />
-                                    </IconButton>
+                                            <RemoveIcon />
+                                        </IconButton>
+                                    </Grid>
                                 </CardActions>
+                                <CardActions>
+                                    <CustomButton
+                                        value='termék eltávolítása'
+                                        variant={'contained'}
+                                        color={'primary'}
+                                        btnSize={'small'}
+                                        onClick={removeProductById(product._id)}
+                                        sx={{ ml: 10, mb: 5 }} />
+                                </CardActions>
+                                <Divider />
                             </Card>
+
 
                         ))}
 
                     </Item>
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={6}>
                     <Item>
                         <Box sx={{ minHeight: 100, pt: 5 }}>
                             <div>

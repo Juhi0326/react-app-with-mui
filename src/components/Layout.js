@@ -21,6 +21,7 @@ import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { signOut, toastShow } from '../store/actions'
+import Badge from '@mui/material/Badge';
 import CustomButton from '../components/CustomButton';
 import CustomSnackbar from '../components/CustomSnackbar';
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -132,6 +133,7 @@ export default function MiniDrawer({ children }) {
   const GoToSelectedPage = (route) => {
     navigate(route)
   }
+  const sumOfQuantity = useSelector(state => state.cart.sumQuantity);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -235,6 +237,7 @@ export default function MiniDrawer({ children }) {
                   px: 2.5,
                 }}
               >
+                
                 <ListItemIcon
                   sx={{
                     minWidth: 0,
@@ -243,7 +246,9 @@ export default function MiniDrawer({ children }) {
                   }}
                   onClick={() => GoToSelectedPage('/users/shopping-cart')}
                 >
+                  <Badge badgeContent={sumOfQuantity} color="primary">
                   <ShoppingCartIcon />
+                  </Badge>
                 </ListItemIcon>
                 <ListItemText primary={"Cart"} sx={{ opacity: open ? 1 : 0 }}
                   onClick={() => GoToSelectedPage('/users/shopping-cart')} />
