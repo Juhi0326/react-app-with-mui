@@ -23,34 +23,28 @@ export default function Products() {
 
     const navigate = useNavigate();
     useEffect(() => {
-        console.log('useffect run from products')
         getProducts();
     }, []);
 
     useEffect(() => {
-        console.log(`ez a loading értéke: ${loading}`)
     }, [loading]);
 
     useEffect(() => {
-        console.log('useffect run with searchString')
         searchProduct(searchString)
     }, [products, searchString])
 
     const searchProduct = (searchString) => {
-        console.log(`ez a paraméter érkezik: ${searchString}`)
         if (searchString) {
             setFilteredProducts(filterProduct(searchString))
         } else {
             setFilteredProducts(products)
         }
-        console.log(products)
     }
     const filterProduct = (searchString) => products.filter(product => {
         return product.name.toLowerCase().includes(searchString.toLowerCase());
       });
 
     const GoToDetails = (productId) => {
-        console.log(`rákattintottam, ez a product id: ${productId}`)
         navigate(`/product-details/${productId}`)
     }
 

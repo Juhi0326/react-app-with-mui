@@ -38,7 +38,7 @@ export const Cart = () => {
     }
 
     const removeProductById = (productId) => {
-        console.log(` ezt kéne törölni: ${productId}`)
+
     }
 
     const formatMoney = (amount) => {
@@ -54,7 +54,7 @@ export const Cart = () => {
 
 
     React.useEffect(() => {
-        console.log('hgh')
+
     }, [cartState, sum]);
 
     return (

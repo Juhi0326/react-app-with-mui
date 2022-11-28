@@ -44,10 +44,8 @@ export const ProductDetails = () => {
     const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
-        console.log('useEffect run from product')
         getProductById(params.id);
         setLoading(false)
-        console.log(product)
     }, []);
 
     React.useEffect(() => {
@@ -73,16 +71,12 @@ export const ProductDetails = () => {
         }
     }
     const getProductById = async (productId) => {
-        console.log(`ez a param.id: ${productId}`)
+
         try {
             const result = await productSevice.getProductById(productId);
-            console.log(`ez a result.data: ${JSON.stringify(result.data.product)}`)
             setProduct(result.data.product);
-            console.log(`ez a setProduct után jön:  ${JSON.stringify(product)}`)
-
         } catch (err) {
             setError(err.message || "Unexpected Error!");
-
         } finally {
         }
     }

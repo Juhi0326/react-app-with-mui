@@ -48,7 +48,6 @@ export const SignIn = () => {
           email: response.useemailrName,
           accessToken: response.accessToken,
         }
-        console.log(loggedUser);
         event.target.reset()
         dispatch(signIn(loggedUser))
         dispatch(toastShow(`Sikeres bejelentkezés, ${loggedUser.userName}, légy üdvözölve! :) `, 'success'))
@@ -90,7 +89,6 @@ export const SignIn = () => {
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
             onChange={(e) => { setEmail(e.target.value) }}
           />
           <TextField

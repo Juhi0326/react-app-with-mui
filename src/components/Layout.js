@@ -111,15 +111,11 @@ export default function MiniDrawer({ children }) {
   React.useEffect(() => {
     if (!isLogged) {
       dispatch(clearCart())
-      
+
     }
-    console.log('változott az islogged, most ez az értéke: ' + isLogged)
   }, [isLogged, dispatch])
 
-  
-
   const handleLogInfo = () => {
-    console.log('rányomtam, és ez az isLogged értéke: ' + isLogged)
     if (isLogged) {
       localStorage.removeItem('user');
       localStorage.removeItem('cartItems');
@@ -127,7 +123,7 @@ export default function MiniDrawer({ children }) {
       navigate('/sign-in')
       dispatch(toastShow(`Sikeres kijelentkezés! `, 'success'))
       window.location.reload()
-      
+
 
     } else {
       navigate('/sign-in')
@@ -196,7 +192,7 @@ export default function MiniDrawer({ children }) {
         <Divider />
         <List>
           <Tooltip title="Home" placement="right-start">
-            <ListItem disablePadding sx={{ display: 'block'}}>
+            <ListItem disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -209,7 +205,7 @@ export default function MiniDrawer({ children }) {
                     minWidth: 0,
                     mr: open ? 3 : 'auto',
                     justifyContent: 'center',
-                                      }}
+                  }}
                   onClick={() => GoToSelectedPage('/')}
                 >
                   <ChaletIcon />
@@ -243,33 +239,35 @@ export default function MiniDrawer({ children }) {
               </ListItemButton>
             </ListItem>
           </Tooltip>
-          <Tooltip title="Cart" placement="right-start">
-            <ListItem disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                
-                <ListItemIcon
+          {isLogged ?
+            <Tooltip title="Cart" placement="right-start">
+              <ListItem disablePadding sx={{ display: 'block' }}>
+                <ListItemButton
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
                   }}
-                  onClick={() => GoToSelectedPage('/users/shopping-cart')}
                 >
-                  <Badge badgeContent={sumOfQuantity} color="primary">
-                  <ShoppingCartIcon />
-                  </Badge>
-                </ListItemIcon>
-                <ListItemText primary={"Cart"} sx={{ opacity: open ? 1 : 0 }}
-                  onClick={() => GoToSelectedPage('/users/shopping-cart')} />
-              </ListItemButton>
-            </ListItem>
-          </Tooltip>
+
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                    onClick={() => GoToSelectedPage('/users/shopping-cart')}
+                  >
+                    <Badge badgeContent={sumOfQuantity} color="primary">
+                      <ShoppingCartIcon />
+                    </Badge>
+                  </ListItemIcon>
+                  <ListItemText primary={"Cart"} sx={{ opacity: open ? 1 : 0 }}
+                    onClick={() => GoToSelectedPage('/users/shopping-cart')} />
+                </ListItemButton>
+              </ListItem>
+            </Tooltip>
+            : null}
         </List>
         <Divider />
       </Drawer>

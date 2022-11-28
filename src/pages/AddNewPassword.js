@@ -32,8 +32,6 @@ export const AddNewPassword = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm(formOptions);
 
     const onSubmit = (event) => {
-        console.log(params.id)
-        console.log(params.token)
         authService.receiveNewPassword(params.id, params.token, {password: password}).then((response) => {
             dispatch(toastShow(`password reseted!`, 'success'))
             reset()

@@ -46,17 +46,14 @@ export const RegisterForm = () => {
         navigate('/sign-in')
     }
     const selectFile = (event) => {
-        console.log(`ez a file change event: ${event}`)
         setFile(event.target.files[0])
-        console.log(file)
     }
     React.useEffect(() => {
-        console.log(file)
     }, [file]);
     const { register, handleSubmit, formState: { errors } } = useForm(formOptions);
 
     const onSubmit = (event) => {
-        console.log(event)
+
         //event.preventDefault();
 /*         const data = new FormData(event)
         let image = data.get('btn-upload')
@@ -68,8 +65,6 @@ export const RegisterForm = () => {
         user.append("role", "user");
         user.append("userImage", file);
 
-
-        console.log(JSON.stringify(user))
         authService.RegisterForm(user)
             .then((response) => {
 /*                 const loggedUser = {
@@ -86,7 +81,6 @@ export const RegisterForm = () => {
 
             })
             .catch((err) => {
-                console.log(err.response.data.message)
                 dispatch(toastShow('Sikertelen Regisztráció! részletes hibaüzenet: ' + err.response.data.message, 'error'))
             });
 

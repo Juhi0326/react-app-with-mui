@@ -26,11 +26,9 @@ export const ResetPasswordEmail = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm(formOptions);
 
     const onSubmit = (event) => {
-        console.log('beérkezett!' + event)
         authService
         .sendResetPasswordEmail(email)
         .then((response) => {
-          console.log(response.data);
           reset()
           dispatch(toastShow(`Email sent successfully! `, 'success'))
         })
