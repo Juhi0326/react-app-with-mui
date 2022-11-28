@@ -20,15 +20,13 @@ import ListItemText from '@mui/material/ListItemText';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { signOut, toastShow } from '../store/actions'
+import { signOut, toastShow, clearCart } from '../store/actions'
 import Badge from '@mui/material/Badge';
 import CustomButton from '../components/CustomButton';
 import CustomSnackbar from '../components/CustomSnackbar';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ChaletIcon from '@mui/icons-material/Chalet';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
-
 
 const drawerWidth = 240;
 
@@ -110,13 +108,27 @@ export default function MiniDrawer({ children }) {
     console.log('useffect run: ' + isXs)
   }, [isXs])
 
+  React.useEffect(() => {
+    if (!isLogged) {
+      dispatch(clearCart())
+      
+    }
+    console.log('változott az islogged, most ez az értéke: ' + isLogged)
+  }, [isLogged, dispatch])
+
+  
+
   const handleLogInfo = () => {
     console.log('rányomtam, és ez az isLogged értéke: ' + isLogged)
     if (isLogged) {
       localStorage.removeItem('user');
+      localStorage.removeItem('cartItems');
       dispatch(signOut())
-      dispatch(toastShow(`Sikeres kijelentkezés! `, 'success'))
       navigate('/sign-in')
+      dispatch(toastShow(`Sikeres kijelentkezés! `, 'success'))
+      window.location.reload()
+      
+
     } else {
       navigate('/sign-in')
     }
@@ -134,6 +146,9 @@ export default function MiniDrawer({ children }) {
     navigate(route)
   }
   const sumOfQuantity = useSelector(state => state.cart.sumQuantity);
+  React.useEffect(() => {
+    console.log('useffect run: ' + isXs)
+  }, [])
 
   return (
     <Box sx={{ display: 'flex' }}>

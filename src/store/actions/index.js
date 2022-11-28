@@ -34,6 +34,12 @@ export const addToCart = (payload)=> {
         payload,
     }
 }
+export const clearCart = (payload)=> {
+    return {
+        type: 'CLEAR_CART',
+    }
+}
+
 
 /* export const changeQuantityOfProductById = (productId,quantity)=> {
     return {

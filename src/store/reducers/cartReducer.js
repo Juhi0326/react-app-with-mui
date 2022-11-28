@@ -51,6 +51,10 @@ const cartReducer = (state, action) => {
                 localStorage.setItem('cartItems', JSON.stringify({ items: products, sumOfCharge:SumOfCharge, sumQuantity: SumQuantity }));
                 return state
             }
+    } else if (action.type === 'CLEAR_CART') {
+        
+        state = { ...state, ...{ items: [], sumOfCharge:0, sumQuantity: 0 } }
+        return state
     }
     else {
         const SumOfCharge = getSumCharge(state.items)

@@ -51,11 +51,11 @@ export const Cart = () => {
 
     const cartState = useSelector(state => state.cart.items);
     const sum = useSelector(state => state.cart.sumOfCharge);
-    const sumOfQuantity = useSelector(state => state.cart.sumQuantity);
+
 
     React.useEffect(() => {
         console.log('hgh')
-    }, [cartState, sumOfQuantity, sum]);
+    }, [cartState, sum]);
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -86,7 +86,7 @@ export const Cart = () => {
                                         mennyiség:: {product.quantity}
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                        Termék ára összesen:: {product.subTotal}
+                                        Termék ára összesen:: {formatMoney(product.subTotal)}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
@@ -123,9 +123,6 @@ export const Cart = () => {
                         <Box sx={{ minHeight: 100, pt: 5 }}>
                             <div>
                                 A kosárban lévő termékek ára összesen:  {formatMoney(sum)}
-                            </div>
-                            <div>
-                                és ennyi van összesen:{sumOfQuantity}
                             </div>
                         </Box>
                     </Item>
